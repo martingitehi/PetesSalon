@@ -1,0 +1,90 @@
+﻿@model IEnumerable<PetesSalon.DomainClasses.User>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>All Users</h2>
+<br />
+<br />
+<div class="col-md-2">
+    <p>
+        <a href="/Users/Create" class="btn btn-info btn-block">
+            <span class="glyphicon glyphicon-plus"></span> Create New User
+        </a>
+        <br />
+        @{
+
+            int count = 0;
+
+            using (var db = new PetesSalon.DomainClasses.Salon())
+            {
+                var emps = (from x in db.User
+                            orderby x.Role ascending
+                            select x.Role).Distinct().ToList();
+
+                foreach (var emp in emps)
+                {
+                    var number = db.User.Where(u => u.Role == emp).ToList().Count();
+                    count = number;
+                    <a href="/Users/List/?category=@emp.ToString()" class="btn btn-primary btn-block">
+                        <span class="glyphicon glyphicon-user"></span>
+                        @emp.ToString() <span class="badge"> @count.ToString()</span>
+                    </a>
+                }
+                count = 0;
+            }
+        }
+    </p>
+
+</div>
+
+<div class="col-md-10">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Role)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Password)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Role)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.UserId }, new { @class = "btn btn-info" }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.UserId }, new { @class = "btn btn-primary" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.UserId }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

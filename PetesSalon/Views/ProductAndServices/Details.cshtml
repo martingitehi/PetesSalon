@@ -1,0 +1,67 @@
+﻿@model PetesSalon.DomainClasses.ProductAndService
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<br />
+<br />
+<br />
+
+<div>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-2">
+            <img src="data:image/png;base64,@Convert.ToBase64String(Model.Image, 0, Model.Image.Length)"
+                 height="300" width="300" alt="@Model.ProductName.ToString()" />
+        </div>
+
+        <div class="col-md-4">
+            <h2>Product/Service Details</h2>
+            <hr />
+            <br />
+            <table class="table table-striped">
+                <tr>
+                    <td><strong>Product/Service Name</strong></td>
+                    <td>@Model.ProductName.ToString()</td>
+                </tr>
+                <tr>
+                    <td><strong>Price (KES)</strong></td>
+                    <td>@Model.ProductPricing.ToString()</td>
+                </tr>
+                <tr>
+                    <td><strong>Description</strong></td>
+                    <td>@Model.Description.ToString()</td>
+                </tr>
+                <tr>
+                    <td><strong>Type</strong></td>
+                    <td>@Model.Type.ToString()</td>
+                </tr>
+            </table>
+            <br />
+            <br />
+            <p>
+                <a href="/ProductAndServices/Edit/?id=@Model.ProductId.ToString()" class="btn btn-info">
+                    <span class="glyphicon glyphicon-edit"></span> Edit
+                </a>
+
+                @*@if (user.Role == "Admin")
+                {
+                    <a href="/Users/Index" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-user"></span> Back to List
+                    </a>
+                }
+                else if (user.Role == "Doctor")
+                {
+                    <a href="/Patients/List" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-user"></span> Back to List
+                    </a>
+                }
+                else
+                {*@
+                    <a href="/ProductAndServices/Index" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-user"></span> Back to Products
+                    </a>
+            </p>
+        </div>
+    </div>
+</div>

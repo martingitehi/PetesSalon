@@ -1,0 +1,55 @@
+﻿@model PetesSalon.DomainClasses.User
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<div class="container">
+    <div class="row">
+        <br />
+        <br />
+        <br />
+        <br />
+    </div>
+
+    @ViewBag.User
+
+    <div class="row">
+        <div class="col-md-3 col-md-offset-4">
+            <div class="panel-primary">
+                <div class="panel-heading">
+                    <strong>Staff Login Only</strong>
+                </div>
+
+                <div class="panel-body">
+                    @using (Html.BeginForm("Login", "Users"))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <h4 class="text-danger">@ViewBag.Error</h4>
+
+                        <div class="form-horizontal">
+                            <h4>Log in here</h4>
+                            <hr />
+
+                            <p><h5><strong>Staff No:</strong></h5></p>
+                            <input type="text" id="userName" class="form-control"
+                                   placeholder="Username" name="userName" />
+
+                            <p><h5><strong>Password:</strong></h5></p>
+                            <input type="password" id="passcode" class="form-control"
+                                   placeholder="Password" name="passcode" />
+                        </div>
+                        <br />
+                        <br />
+                        <button type="submit" value="Login"
+                                class="btn btn-success btn-lg btn-block">
+                            Log In
+                        </button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
